@@ -1,11 +1,11 @@
 package com.steve_md.jetpackcompose.screens
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.border
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -30,10 +30,10 @@ import com.steve_md.jetpackcompose.ui.theme.*
 @Composable
 fun HomeScreen() {
     val sendMoneyData= mutableListOf (
-        SendMoneyItem(R.drawable.user1,"Jimmy","$55.90"),
-        SendMoneyItem(R.drawable.user2,"Kate","$156.54"),
-        SendMoneyItem(R.drawable.user3,"Smith","$840.36"),
-        SendMoneyItem(R.drawable.user3,"John","$840.36")
+        SendMoneyItem(R.drawable.user1,"Jackline","Kes 200"),
+        SendMoneyItem(R.drawable.user2,"Mirriam","Kes 500"),
+        SendMoneyItem(R.drawable.user3,"Stephen","Kes 300"),
+        SendMoneyItem(R.drawable.user3,"Victor","Kes 1000")
     )
     Column(modifier = Modifier.fillMaxWidth()) {
         HeaderUI()
@@ -53,8 +53,7 @@ fun SendMoneyUI(sendMoneyData: MutableList<SendMoneyItem>) {
     ) {
         Text(
             text = "Send Money",
-            color = Color.LightGray,
-            fontFamily = FontFamily.Serif,
+            fontFamily = FontFamily(Font(R.font.montserrat_bold)),
             fontWeight = FontWeight.Bold
         )
         Spacer(
@@ -63,7 +62,7 @@ fun SendMoneyUI(sendMoneyData: MutableList<SendMoneyItem>) {
                 .height(10.dp)
         )
         LazyRow {
-            items(sendMoneyData ) {item->
+            items(sendMoneyData) {item->
                 SendMoneyItemUI(item)
             }
         }
@@ -73,10 +72,10 @@ fun SendMoneyUI(sendMoneyData: MutableList<SendMoneyItem>) {
 @Composable
 fun SendMoneyItemUI(item: SendMoneyItem) {
     Card(
-        elevation = 0.dp,
+        elevation = 2.dp,
         modifier = Modifier
             .padding(end = 6.dp)
-            .border(width = 0.dp, color = Color.LightGray, shape = Shapes.medium)
+            .border(width = 1.dp, color = Color.LightGray ,shape = Shapes.medium)
             .padding(vertical = 10.dp)
 
     ) {
@@ -86,26 +85,22 @@ fun SendMoneyItemUI(item: SendMoneyItem) {
         ) {
             Image(
                 painter = painterResource(id = item.imageId),
-                contentDescription = "",
+                contentDescription = "image",
                 modifier = Modifier.size(60.dp)
             )
             Text(
                 text = item.name,
-                color = Color.LightGray,
                 modifier = Modifier
                     .alpha(0.6f)
                     .padding(top = 6.dp),
                 fontSize = 12.sp,
-                fontWeight = FontWeight.SemiBold,
-                fontFamily = FontFamily.Serif
+                fontFamily = FontFamily(Font(R.font.montserrat_semibold))
             )
             Text(
                 text = item.Amount,
-                color = Color.LightGray,
                 modifier = Modifier.alpha(0.8f),
                 fontSize = 14.sp,
-                fontWeight = FontWeight.Bold,
-                fontFamily = FontFamily.Serif
+                fontFamily = FontFamily(Font(R.font.montserrat_semibold))
             )
         }
     }
@@ -116,8 +111,7 @@ fun ServicesUI() {
     Column(modifier = Modifier.padding(horizontal = 20.dp)) {
         Text(
             text = "Services",
-            color = Color.LightGray,
-            fontFamily = FontFamily.Serif,
+            fontFamily = FontFamily(Font(R.font.montserrat_bold)),
             fontWeight = FontWeight.Bold
         )
         Spacer(
@@ -127,8 +121,8 @@ fun ServicesUI() {
         )
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
             ServiceUI(R.drawable.ic_money_send, "Send", Service1)
-            ServiceUI(R.drawable.ic_bill, "Bill", Service2)
-            ServiceUI(R.drawable.ic_recharge, "Recharge", Service3)
+            ServiceUI(R.drawable.ic_bill, "Pay bills", Service2)
+            ServiceUI(R.drawable.ic_recharge, "Deposit", Service3)
             ServiceUI(R.drawable.ic_more, "More", Service4)
         }
 
@@ -138,7 +132,7 @@ fun ServicesUI() {
 
 @Composable
 fun ServiceUI(id: Int, text: String, color: Color) {
-    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+    Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
         OutlinedButton(
             onClick = { },
             modifier = Modifier.size(60.dp),  //avoid the oval shape
@@ -147,16 +141,14 @@ fun ServiceUI(id: Int, text: String, color: Color) {
             contentPadding = PaddingValues(0.dp),  //avoid the little icon
             colors = ButtonDefaults.outlinedButtonColors(contentColor = color)
         ) {
-            Icon(painter = painterResource(id = id), contentDescription = "content description")
+            Icon(painter = painterResource(id = id), contentDescription = "services_icon")
         }
         Spacer(modifier = Modifier.height(10.dp))
         Text(
             text = text,
-            color = Color.LightGray,
             modifier = Modifier.alpha(0.6f),
             fontSize = 14.sp,
-            fontWeight = FontWeight.SemiBold,
-            fontFamily = FontFamily.Serif
+            fontFamily = FontFamily(Font(R.font.montserrat_regular))
         )
     }
 }
@@ -170,34 +162,28 @@ fun DataUI() {
     ) {
         Column {
             Text(
-                text = "$87.50K",
-                color = Color.LightGray,
+                text = "Kes 80,000",
                 fontSize = 28.sp,
-                fontWeight = FontWeight.Bold,
-                fontFamily = FontFamily.Serif,
+                fontFamily = FontFamily(Font(R.font.montserrat_semibold)),
                 lineHeight = 20.sp
             )
             Text(
                 text = "Total Income",
-                color = Color.LightGray,
-                fontFamily = FontFamily.Serif,
+                fontFamily = FontFamily(Font(R.font.montserrat_semibold)),
                 modifier = Modifier.alpha(0.6f),
                 fontSize = 14.sp
             )
         }
         Column {
             Text(
-                text = "$12.80K",
-                color = Color.LightGray,
+                text = "Kes 12,000",
                 fontSize = 28.sp,
-                fontWeight = FontWeight.Bold,
-                fontFamily = FontFamily.Serif,
+                fontFamily = FontFamily(Font(R.font.montserrat_semibold)),
                 lineHeight = 20.sp
             )
             Text(
                 text = "Total Spent",
-                color = Color.LightGray,
-                fontFamily = FontFamily.Serif,
+                fontFamily = FontFamily(Font(R.font.montserrat_semibold)),
                 modifier = Modifier.alpha(0.6f),
                 fontSize = 14.sp
             )
@@ -213,6 +199,7 @@ fun CardUI() {
             .padding(horizontal = 20.dp)
             .fillMaxWidth()
             .height(160.dp),
+        shape = RoundedCornerShape(10.dp)
     ) {
         Row {
             Column(modifier = Modifier.padding(20.dp)) {
@@ -222,12 +209,12 @@ fun CardUI() {
                     modifier = Modifier
                         .alpha(0.6f)
                         .padding(top = 10.dp),
-                    fontFamily = FontFamily.Serif
+                    fontFamily = FontFamily(Font(R.font.montserrat_semibold))
                 )
                 Text(
-                    text = "$28,067.50",
+                    text = "Kes 98,000",
                     color = Color.White,
-                    fontFamily = FontFamily.Serif,
+                    fontFamily = FontFamily(Font(R.font.montserrat_regular)),
                     fontSize = 30.sp
                 )
                 Button(
@@ -235,23 +222,24 @@ fun CardUI() {
                     modifier = Modifier
                         .clip(Shapes.large)
                         .border(width = 0.dp, color = Color.Transparent, shape = Shapes.large),
-                    colors = ButtonDefaults.buttonColors(backgroundColor = Color.LightGray),
+                    colors = ButtonDefaults.buttonColors(backgroundColor = pureGold),
                 ) {
                     Text(
                         text = "Withdraw",
                         fontSize = 12.sp,
+                        color = Color.White,
                         modifier = Modifier.align(alignment = CenterVertically)
                     )
                 }
             }
             Icon(
                 painter = painterResource(id = R.drawable.ic_wallet),
-                contentDescription = "",
+                contentDescription = "wallet_icon",
                 tint = Color.White,
                 modifier = Modifier
-                    .alpha(0.4f)
+                    .alpha(0.8f)
                     .size(80.dp)
-                    .padding(top = 20.dp, start = 20.dp)
+                    .padding(top = 36.dp, start = 16.dp)
             )
         }
 
@@ -286,9 +274,8 @@ fun HeaderUI() {
             Text(
                 text = "Welcome Back",
                 fontSize = 20.sp,
-                fontFamily = FontFamily(Font(R.font.montserrat_semibold)),
+                fontFamily = FontFamily(Font(R.font.montserrat_regular)),
                 fontWeight = FontWeight.Normal,
-                color = Color.LightGray
             )
         }
         //Spacer(modifier = Modifier.fillMaxWidth())
